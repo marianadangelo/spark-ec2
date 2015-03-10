@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Install ganglia
+# TODO: Remove this once the AMI has ganglia by default
+
+#GANGLIA_PACKAGES="ganglia ganglia-web ganglia-gmond ganglia-gmetad"
+GANGLIA_PACKAGES="ganglia-monitor ganglia-webfrontend gmetad"
+
+sudo apt-get install -q -y $GANGLIA_PACKAGES
+
 # NOTE: Remove all rrds which might be around from an earlier run
 sudo sh -c 'rm -rf /var/lib/ganglia/rrds'
 sudo sh -c 'rm -rf /mnt/ganglia/rrds'
@@ -9,15 +17,9 @@ sudo sh -c 'mkdir -p /mnt/ganglia/rrds'
 sudo sh -c 'chown -R nobody:nogroup /mnt/ganglia/rrds'
 sudo sh -c 'ln -s /mnt/ganglia/rrds /var/lib/ganglia/rrds'
 
-# Install ganglia
-# TODO: Remove this once the AMI has ganglia by default
-
-#GANGLIA_PACKAGES="ganglia ganglia-web ganglia-gmond ganglia-gmetad"
-GANGLIA_PACKAGES="ganglia-monitor ganglia-webfrontend gmetad"
-
-sudo apt-get install -q -y $GANGLIA_PACKAGES
 
 for node in $SLAVES $OTHER_MASTERS; do
+  ssh -t -t $SSH_OPTS ubuntu@$node "sudo apt-get install -q -y ganglia-monitor" & sleep 0.3
   ssh -t -t $SSH_OPTS ubuntu@$node "sudo sh -c 'rm -rf /var/lib/ganglia/rrds'" & sleep 0.3
   ssh -t -t $SSH_OPTS ubuntu@$node "sudo sh -c 'rm -rf /mnt/ganglia/rrds'" & sleep 0.3
 
@@ -25,6 +27,5 @@ for node in $SLAVES $OTHER_MASTERS; do
   ssh -t -t $SSH_OPTS ubuntu@$node "sudo sh -c 'mkdir -p /mnt/ganglia/rrds'" & sleep 0.3
   ssh -t -t $SSH_OPTS ubuntu@$node "sudo sh -c 'chown -R nobody:nogroup /mnt/ganglia/rrds'" & sleep 0.3
   ssh -t -t $SSH_OPTS ubuntu@$node "sudo sh -c 'ln -s /mnt/ganglia/rrds /var/lib/ganglia/rrds'" & sleep 0.3
-  ssh -t -t $SSH_OPTS ubuntu@$node "sudo apt-get install -q -y ganglia-monitor" & sleep 0.3
 done
 wait
