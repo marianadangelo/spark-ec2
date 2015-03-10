@@ -25,5 +25,16 @@ sudo apt-get install -q -y $GANGLIA_PACKAGES
 for node in $SLAVES $OTHER_MASTERS; do
   #ssh -t -t $SSH_OPTS root@$node "if ! rpm --quiet -q $GANGLIA_PACKAGES; then yum install -q -y $GANGLIA_PACKAGES; fi" & sleep 0.3
   ssh -t -t $SSH_OPTS ubuntu@$node "sudo apt-get install -q -y $GANGLIA_PACKAGES" & sleep 0.3
+  # NOTE: Remove all rrds which might be around from an earlier run
+  ssh -t -t $SSH_OPTS ubuntu@$node "sudo rm -rf /var/lib/ganglia/rrds/*" & sleep 0.3
+  ssh -t -t $SSH_OPTS ubuntu@$node "sudo rm -rf /mnt/ganglia/rrds/*" & sleep 0.3
+
+  # Symlink /var/lib/ganglia/rrds to /mnt/ganglia/rrds
+  ssh -t -t $SSH_OPTS ubuntu@$node "sudo rmdir /var/lib/ganglia/rrds" & sleep 0.3
+  ssh -t -t $SSH_OPTS ubuntu@$node "sudo ln -s /mnt/ganglia/rrds /var/lib/ganglia/rrds" & sleep 0.3
+
+  # Make sure rrd storage directory has right permissions
+  ssh -t -t $SSH_OPTS ubuntu@$node "sudo mkdir -p /mnt/ganglia/rrds" & sleep 0.3
+  ssh -t -t $SSH_OPTS ubuntu@$node "sudo chown -R nobody:nogroup /mnt/ganglia/rrds" & sleep 0.3
 done
 wait
