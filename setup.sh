@@ -117,6 +117,7 @@ done
 # TODO: Move configuring templates to a per-module ?
 echo "Creating local config files..."
 sudo chmod -R a+w /etc/ganglia
+sudo chmod -R a+w /etc/ganglia-webfrontend
 sudo chmod -R a+w /etc/apache2
 ./deploy_templates.py
 
