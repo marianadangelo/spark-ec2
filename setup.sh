@@ -126,6 +126,7 @@ chmod u+x /home/ubuntu/spark/conf/spark-env.sh
 /home/ubuntu/spark-ec2/copy-dir /home/ubuntu/spark/conf
 
 sudo chown -R ubuntu:ubuntu /mnt/
+sudo mkdir /var/hadoop
 sudo chown -R ubuntu:ubuntu /var/hadoop
 
 # Setup each module
