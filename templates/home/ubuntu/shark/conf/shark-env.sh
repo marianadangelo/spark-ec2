@@ -8,17 +8,17 @@ SPARK_JAVA_OPTS+="-Dspark.kryoserializer.buffer.mb=10 "
 #SPARK_JAVA_OPTS+="-verbose:gc -XX:-PrintGCDetails -XX:+PrintGCTimeStamps "
 export SPARK_JAVA_OPTS
 
-if [ -f "/root/hive-0.9-bin" ]; then
+if [ -f "/home/ubuntu/hive-0.9-bin" ]; then
   # Point HIVE_HOME to the Hive 0.9 binary manually fetched
   # during instance setup. This only applies for Shark v0.8.
-  export HIVE_HOME="/root/hive-0.9.0-bin"
+  export HIVE_HOME="/home/ubuntu/hive-0.9.0-bin"
 fi
 
-export HADOOP_HOME=/root/ephemeral-hdfs
-export HIVE_CONF_DIR=/root/ephemeral-hdfs/conf
+export HADOOP_HOME=/home/ubuntu/ephemeral-hdfs
+export HIVE_CONF_DIR=/home/ubuntu/ephemeral-hdfs/conf
 
-export MASTER=`cat /root/spark-ec2/cluster-url`
-export SPARK_HOME=/root/spark
+export MASTER=`cat /home/ubuntu/spark-ec2/cluster-url`
+export SPARK_HOME=/home/ubuntu/spark
 
 export TACHYON_MASTER="tachyon://{{active_master}}:19998"
 export TACHYON_WAREHOUSE_PATH="/sharktables"

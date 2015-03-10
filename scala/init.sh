@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pushd /root
+pushd /home/ubuntu
 
 if [ -d "scala" ]; then
   echo "Scala seems to be installed. Exiting."

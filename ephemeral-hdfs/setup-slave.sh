@@ -1,5 +1,8 @@
 #!/bin/bash
 
+sudo chown -R ubuntu:ubuntu /mnt
+sudo chmod a+w /var
+
 # Setup ephemeral-hdfs
 mkdir -p /mnt/ephemeral-hdfs/logs
 mkdir -p /mnt/hadoop-logs

@@ -1,4 +1,4 @@
 #!/bin/bash
 
-/root/spark-ec2/copy-dir /root/shark
-/root/spark-ec2/copy-dir /root/hive*
+/home/ubuntu/spark-ec2/copy-dir /home/ubuntu/shark
+/home/ubuntu/spark-ec2/copy-dir /home/ubuntu/hive*

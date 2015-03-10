@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pushd /root
+pushd /home/ubuntu
 
 if [ -d "shark" ]; then
   echo "Shark seems to be installed. Exiting."
