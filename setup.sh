@@ -4,6 +4,7 @@
 cd /home/ubuntu/spark-ec2
 
 # Load the environment variables specific to this AMI
+echo 'export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64' >> /home/ubuntu/.bashrc
 source /home/ubuntu/.bashrc
 
 # Load the cluster variables set by the deploy script
