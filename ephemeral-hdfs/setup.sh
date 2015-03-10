@@ -7,11 +7,11 @@ HDFS_URL="hdfs://$PUBLIC_DNS:9000"
 echo "export HDFS_URL=$HDFS_URL" >> ~/.bashrc
 
 pushd /home/ubuntu/spark-ec2/ephemeral-hdfs
-sudo ./setup-slave.sh
+./setup-slave.sh
 
 for node in $SLAVES $OTHER_MASTERS; do
   echo $node
-  ssh -t -t $SSH_OPTS ubuntu@$node "sudo /home/ubuntu/spark-ec2/ephemeral-hdfs/setup-slave.sh" & sleep 0.3
+  ssh -t -t $SSH_OPTS ubuntu@$node "/home/ubuntu/spark-ec2/ephemeral-hdfs/setup-slave.sh" & sleep 0.3
 done
 wait
 
