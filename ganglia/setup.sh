@@ -10,7 +10,7 @@ for node in $SLAVES $OTHER_MASTERS; do
 done
 
 # gmeta needs rrds to be owned by nobody
-sudo chown -R nobody /var/lib/ganglia/rrds
+sudo chown -R nobody /mnt/ganglia/rrds
 # cluster-wide aggregates only show up with this. TODO: Fix this cleanly ?
 sudo ln -s /usr/share/ganglia/conf/default.json /var/lib/ganglia-web/conf/
 
