@@ -5,12 +5,12 @@ sudo rm -rf /var/lib/ganglia/rrds/*
 sudo rm -rf /mnt/ganglia/rrds/*
 
 # Symlink /var/lib/ganglia/rrds to /mnt/ganglia/rrds
-sudo rmdir /var/lib/ganglia/rrds
-sudo ln -s /mnt/ganglia/rrds /var/lib/ganglia/rrds
+sudo rm -rf /var/lib/ganglia/rrds
 
 # Make sure rrd storage directory has right permissions
 sudo mkdir -p /mnt/ganglia/rrds
 sudo chown -R nobody:nogroup /mnt/ganglia/rrds
+sudo ln -s /mnt/ganglia/rrds /var/lib/ganglia/rrds
 
 # Install ganglia
 # TODO: Remove this once the AMI has ganglia by default
@@ -30,11 +30,11 @@ for node in $SLAVES $OTHER_MASTERS; do
   ssh -t -t $SSH_OPTS ubuntu@$node "sudo rm -rf /mnt/ganglia/rrds/*" & sleep 0.3
 
   # Symlink /var/lib/ganglia/rrds to /mnt/ganglia/rrds
-  ssh -t -t $SSH_OPTS ubuntu@$node "sudo chown -R nobody /var/lib/ganglia/rrds" & sleep 0.3
-  ssh -t -t $SSH_OPTS ubuntu@$node "sudo ln -s /mnt/ganglia/rrds /var/lib/ganglia/rrds" & sleep 0.3
+  ssh -t -t $SSH_OPTS ubuntu@$node "sudo rm -rf /var/lib/ganglia/rrds" & sleep 0.3
 
   # Make sure rrd storage directory has right permissions
   ssh -t -t $SSH_OPTS ubuntu@$node "sudo mkdir -p /mnt/ganglia/rrds" & sleep 0.3
   ssh -t -t $SSH_OPTS ubuntu@$node "sudo chown -R nobody:nogroup /mnt/ganglia/rrds" & sleep 0.3
+  ssh -t -t $SSH_OPTS ubuntu@$node "sudo ln -s /mnt/ganglia/rrds /var/lib/ganglia/rrds" & sleep 0.3
 done
 wait
