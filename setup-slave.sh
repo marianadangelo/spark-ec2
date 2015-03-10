@@ -116,4 +116,5 @@ echo 'readlink -e "$@"' >> /usr/bin/realpath
 chmod a+x /usr/bin/realpath
 
 chown -R ubuntu:ubuntu /etc/ganglia
+mkdir /var/hadoop
 chown -R ubuntu:ubuntu /var/hadoop
