@@ -30,7 +30,7 @@ for node in $SLAVES $OTHER_MASTERS; do
   ssh -t -t $SSH_OPTS ubuntu@$node "sudo rm -rf /mnt/ganglia/rrds/*" & sleep 0.3
 
   # Symlink /var/lib/ganglia/rrds to /mnt/ganglia/rrds
-  ssh -t -t $SSH_OPTS ubuntu@$node "sudo rmdir /var/lib/ganglia/rrds" & sleep 0.3
+  ssh -t -t $SSH_OPTS ubuntu@$node "sudo chown -R nobody /var/lib/ganglia/rrds" & sleep 0.3
   ssh -t -t $SSH_OPTS ubuntu@$node "sudo ln -s /mnt/ganglia/rrds /var/lib/ganglia/rrds" & sleep 0.3
 
   # Make sure rrd storage directory has right permissions
