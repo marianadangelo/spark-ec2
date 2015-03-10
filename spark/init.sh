@@ -108,7 +108,7 @@ else
         wget https://s3.amazonaws.com/soh-murphi/spark-1.2.0-soh.tgz
       else
         #wget http://s3.amazonaws.com/spark-related-packages/spark-1.2.0-bin-cdh4.tgz
-        https://s3.amazonaws.com/soh-murphi/spark-1.2.0-soh.tgz
+        wget https://s3.amazonaws.com/soh-murphi/spark-1.2.0-soh.tgz
       fi
       ;;
     1.2.1)
