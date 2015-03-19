@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo yum install -y -q pssh
+apt-get install -y -q pssh
 
 # usage: echo_time_diff name start_time end_time
 echo_time_diff () {
@@ -14,7 +14,7 @@ echo_time_diff () {
 pushd /root/spark-ec2 > /dev/null
 
 # Load the environment variables specific to this AMI
-source /root/.bash_profile
+source /root/.bashrc
 
 # Load the cluster variables set by the deploy script
 source ec2-variables.sh
@@ -66,7 +66,7 @@ echo_time_diff "rsync /root/spark-ec2" "$rsync_start_time" "$rsync_end_time"
 
 echo "Running setup-slave on all cluster nodes to mount filesystems, etc..."
 setup_slave_start_time="$(date +'%s')"
-pssh --inline \
+parallel-ssh --inline \
     --host "$MASTERS $SLAVES" \
     --user root \
     --extra-args "-t -t $SSH_OPTS" \
