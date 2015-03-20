@@ -15,6 +15,9 @@ chown -R nobody /var/lib/ganglia/rrds
 #ln -s /usr/share/ganglia/conf/default.json /var/lib/ganglia/conf/
 cp /etc/ganglia-webfrontend/apache.conf /etc/apache2/sites-enabled/ganglia.conf
 
+# soh: makes webfrontend accessible
+chown -R nobody:nogroup /mnt/ganglia/rrds
+
 service gmetad restart
 
 # Start http server to serve ganglia
