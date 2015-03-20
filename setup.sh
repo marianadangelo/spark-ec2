@@ -15,6 +15,7 @@ pushd /root/spark-ec2 > /dev/null
 
 # Load the environment variables specific to this AMI
 source /root/.bashrc
+export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64  # soh: why is this needed??
 
 # Load the cluster variables set by the deploy script
 source ec2-variables.sh
